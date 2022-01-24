@@ -9,51 +9,32 @@ export default function TodoList() {
     const [todos, setTodos] = useState([])
 
 
-    const addTodo = todo =>{
-        
-        console.log("We are In on TodoList")
-        console.log("In the list component add todo")
-        console.log(todo.text)
-
-        if (!todo.text || /^\s*$/.test(todo.text)){
-            return
-        }
+    const addTodo = todo =>{ 
+        // console.log("We are In on TodoList")
+        // console.log("In the list component add todo")
+        // console.log(todo.text)
+        if (!todo.text || /^\s*$/.test(todo.text)){return}
         const newTodos = [todo,...todos]
-        console.log("Dotted Todo",...todos)
-        console.log(newTodos)
         setTodos(newTodos)
-
     }
 
     const removeTodo = id =>{
-
         const removeArr = [...todos].filter(todo => todo.id != id)
-
         setTodos(removeArr)
     }
 
-
-
     const updateTodo = (todoId, newValue) =>{
-     
-        if (!newValue.text || /^\s*$/.test(newValue.text)){
-            return
-        }
+        if (!newValue.text || /^\s*$/.test(newValue.text)){return}
         const updatedVal = prev => prev.map(item => (item.id === todoId ? newValue : item));
         setTodos(updatedVal)
     }
 
-
     const completeTodo = id =>{
-     
         console.log("Calling Completed Tdod")
         let updatedTodo = todos.map(todo => {
-            if (todo.id === id){
-                todo.isComplete = !todo.isComplete
-            }
+            if (todo.id === id){todo.isComplete = !todo.isComplete}
             return todo
         });
-
         let newtodos = [...todos]
         setTodos(updatedTodo)
     }
@@ -69,7 +50,6 @@ export default function TodoList() {
             <TodoForm  name = 'hell' onSubmit = {addTodo}/>
             <h1> Here is the list</h1> 
             <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo}/>
-        
         </div>
     )
 }
